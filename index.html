@@ -1,0 +1,154 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>ETH GPA Calculator</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery.dropotron.min.js"></script>
+		<script src="js/jquery.scrollgress.min.js"></script>
+		<script src="js/skel.min.js"></script>
+		<script src="js/skel-layers.min.js"></script>
+		<script src="js/init.js"></script>
+		<script src="js/add.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+		<noscript>
+			<link rel="stylesheet" href="css/skel.css" />
+			<link rel="stylesheet" href="css/style.css" />
+			<link rel="stylesheet" href="css/style-wide.css" />
+		</noscript>
+		<link rel="stylesheet" href="./css/bootstrap-modal.css">
+		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
+	</head>
+	<body>
+		<!-- Header -->
+			<header id="header" class="skel-layers-fixed">
+				<h1><a href="index.html">ETH GPA Rechner</a> by CareStudent</h1>
+				<nav id="nav">
+					<ul>
+						<li><a href="index.html">Home</a></li>
+						<li><a href="index.html">Grading Rules</a></li>
+					</ul>
+				</nav>
+			</header>
+
+		<!-- Main -->
+			<section id="main" class="container 75%">
+				<header>
+					<h2>ETH GPA Calculator</h2>
+					<p>Are you summa cum laude?</p>
+				</header>
+
+				<div class="row uniform 50%">
+					<div class="3u 12u(mobilep)">
+						<div class="select-wrapper">
+							<select name="grade" id="grade">
+								<option value="">- Grade -</option>
+									<option value="6">6</option>
+									<option value="5.75">5.75</option>
+									<option value="5.5">5.5</option>
+									<option value="5.25">5.25</option>
+									<option value="5">5</option>
+									<option value="4.75">4.75</option>
+									<option value="4.5">4.5</option>
+									<option value="4.25">4.25</option>
+									<option value="4">4</option>
+							</select>
+						</div>
+					</div>
+					<div class="3u 12u(mobilep)">
+						<input type="text" name="credit" id="credit" value="" placeholder="Credit Points" />
+					</div>
+					<div class="3u 12u(mobilep)">
+						<input type="text" name="weight" id="weight" value="" placeholder="Weight" />
+					</div>
+					<div class="3u 12u(mobilep)">
+						<button onclick="handleAddAction()" class="button special fit">Add</button>
+					</div>
+				</div>
+			</section>
+			<div class="container 75%">
+				<section class="box">
+					<div class="table-wrapper">
+						<table>
+							<thead>
+								<tr>
+									<th>Grade</th>
+									<th>Credit Points</th>
+									<th>Weight</th>
+								</tr>
+							</thead>
+							<tbody class="grades" />
+						</table>
+					</div>
+					<div class="3u 12u(mobilep)">
+						<button onclick="calculateGPA()" class="button special" data-toggle="modal" data-target="#calcModal">Calculate</button>
+					</div>
+				</section>
+			</div>
+
+		<!-- Feedback box-->
+			<section id="feedback" class="container 75%">
+					<div class="box">
+						<p>Any suggestions about the caculator?</p>
+						<form method="GET" action="mailto:carestudentlife@gmail.com">
+							<div class="row uniform 50%">
+								<div class="6u 12u(mobilep)">
+									<input type="text" name="name" id="name" value="" placeholder="Name" />
+								</div>
+								<div class="6u 12u(mobilep)">
+									<input type="email" name="email" id="email" value="" placeholder="Email" />
+								</div>
+							</div>
+							<div class="row uniform 50%">
+								<div class="12u">
+									<input type="text" name="subject" id="subject" value="" placeholder="Subject" />
+								</div>
+							</div>
+							<div class="row uniform 50%">
+								<div class="12u">
+									<textarea name="body" id="body" placeholder="Enter your message" rows="6"></textarea>
+								</div>
+							</div>
+							<div class="row uniform">
+								<div class="12u">
+									<ul class="actions align-center">
+										<li><input type="submit" value="Send Message" /></li>
+									</ul>
+								</div>
+							</div>
+						</form>
+					</div>
+				</section>
+		<!-- Footer -->
+			<footer id="footer">
+				<ul class="icons">
+					<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+					<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+					<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+					<li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
+					<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+					<li><a href="#" class="icon fa-google-plus"><span class="label">Google+</span></a></li>
+				</ul>
+				<ul class="copyright">
+					<li>&copy; ETH GPA Rechner. All rights reserved.</li>
+				</ul>
+			</footer>
+
+			<div class="modal fade" id="calcModal" tabindex="-1" role="dialog">
+		      <div class="modal-dialog" style="margin-top: 10%">
+		        <div class="modal-content">
+		          <div class="modal-header">
+		            <span style="float:right;cursor:pointer" type="button" onclick="clearGPA()" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></span>
+		            <h4 class="modal-title" id="titleModalLabel">Here is your Grade Point Average (GPA)!</h4>
+		          </div>
+		          <div class="modal-body">
+	                <h2 id="gpa"></h2>
+		          </div>
+		        </div>
+		      </div>
+		    </div>
+	</body>
+</html>
